@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jolien\\source\\repos\\ContactWeb\\Contact\\Contact\\Contact.csproj",
-      "projectName": "Contact",
-      "projectPath": "C:\\Users\\Jolien\\source\\repos\\ContactWeb\\Contact\\Contact\\Contact.csproj",
+      "projectUniqueName": "C:\\Users\\Jolien\\source\\repos\\ContactWeb\\Contact\\Contact\\ContactWeb.csproj",
+      "projectName": "ContactWeb",
+      "projectPath": "C:\\Users\\Jolien\\source\\repos\\ContactWeb\\Contact\\Contact\\ContactWeb.csproj",
       "packagesPath": "C:\\Users\\Jolien\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Jolien\\source\\repos\\ContactWeb\\Contact\\Contact\\obj\\",
       "projectStyle": "PackageReference",
