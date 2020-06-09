@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Contact.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Contact.Models;
 
-namespace Contact.Controllers
+namespace ContactWeb
 {
     public class HomeController : Controller
     {

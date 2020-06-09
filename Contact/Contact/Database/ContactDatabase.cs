@@ -1,45 +1,46 @@
-﻿using System;
+﻿using Contact.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Contact
+namespace Contact.Database
 {
-    
+  
         public interface IContactDatabase
         {
-        Contact Insert(Contact contact);
-            IEnumerable<Contact> GetMovies();
-        Contact GetContact(int id);
+        ContactPerson Insert(ContactPerson contact);
+            IEnumerable<ContactPerson> GetMovies();
+        ContactPerson GetContact(int id);
             void Delete(int id);
-            void Update(int id, Contact movie);
+            void Update(int id, ContactPerson contact);
         }
 
-    public class MovieDatabase : IContactDatabase
+    public class ContactDatabase : IContactDatabase
     {
         private int _counter;
-        private readonly List<Contact> _contacts;
+        private readonly List<ContactPerson> _contacts;
 
-        public MovieDatabase()
+        public ContactDatabase()
         {
             if (_contacts == null)
             {
-                _contacts = new List<Contact>();
+                _contacts = new List<ContactPerson>();
             }
         }
 
-        public Contact GetContact(int id)
+        public ContactPerson GetContact(int id)
         {
             return _contacts.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Contact> GetMovies()
+        public IEnumerable<ContactPerson> GetMovies()
         {
             return _contacts;
         }
 
-        public Contact Insert(Contact contact)
+        public ContactPerson Insert(ContactPerson contact)
         {
             _counter++;
             contact.Id = _counter;
@@ -56,7 +57,7 @@ namespace Contact
             }
         }
 
-        public void Update(int id, Contact updatedContact)
+        public void Update(int id, ContactPerson updatedContact)
         {
             var contact = _contacts.SingleOrDefault(x => x.Id == id);
             if (contact != null)
