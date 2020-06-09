@@ -39,6 +39,7 @@ namespace ContactWeb
             {
                 FirstName = contactToDisplay.FirstName,
                 SecondName = contactToDisplay.SecondName,
+                Birthdate = contactToDisplay.Birthdate,
                 Description = contactToDisplay.Description,
                 PhoneNumber = contactToDisplay.PhoneNumber,
                 Address = contactToDisplay.Address,
@@ -53,17 +54,26 @@ namespace ContactWeb
         }
         public IActionResult Create(ContactCreateViewModel vm)
         {
-            ContactPerson newContact = new ContactPerson()
+            if (!TryValidateModel(vm))
             {
-                FirstName = vm.FirstName,
-                SecondName = vm.SecondName,
-                Address = vm.Address,
-                PhoneNumber = vm.PhoneNumber,
-                Email = vm.Email,
-                Description = vm.Description
-            };
-            _contactDatabase.Insert(newContact);
-            return RedirectToAction("Index");
+                return View(vm);
+            }
+            else
+            {
+                ContactPerson newContact = new ContactPerson()
+                {
+                    FirstName = vm.FirstName,
+                    SecondName = vm.SecondName,
+                    Birthdate = vm.Birthdate,
+                    Address = vm.Address,
+                    PhoneNumber = vm.PhoneNumber,
+                    Email = vm.Email,
+                    Description = vm.Description
+                };
+                _contactDatabase.Insert(newContact);
+                return RedirectToAction("Index");
+            }
+            
         }
     }
 }

@@ -18,6 +18,8 @@ namespace ContactWeb.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email required to fill in.")]
         public string Email { get; set; }
+        [Range(typeof(DateTime), "01/01/1910", "01/01/2020")]
+        public DateTime Birthdate { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Phone Number required to fill in.")]
         public string PhoneNumber { get; set; }

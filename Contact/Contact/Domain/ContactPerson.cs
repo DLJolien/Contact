@@ -8,6 +8,7 @@ namespace Contact.Domain
     public class ContactPerson
     {
         public int Id { get; set; }
+        public DateTime Birthdate { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Email { get; set; }
