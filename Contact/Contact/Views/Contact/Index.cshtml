@@ -10,7 +10,7 @@
         foreach (ContactListViewModel item in Model)
         {
 
-        <p>@item.FirstName @item.SecondName</p>
+        <p> <a asp-controller="contact" asp-action="detail" asp-route-id="@item.Id"> @item.FirstName @item.SecondName</a></p>
 
         }
     }
