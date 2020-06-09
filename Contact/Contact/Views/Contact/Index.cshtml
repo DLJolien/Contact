@@ -6,28 +6,17 @@
     }
     else
     {
+        <strong>Names:</strong>
         foreach (ContactListViewModel item in Model)
         {
-            <strong>First name:</strong>
-            <p>item.FirstName</p>
 
-            <strong>Second name:</strong>
-            <p>item.SecondName</p>
+        <p>@item.FirstName @item.SecondName</p>
 
-            <strong>Phone number:</strong>
-            <p>item.PhoneNumber</p>
-
-            <strong>Address:</strong>
-            <p>item.Address</p>
-
-            <strong>Email:</strong>
-            <p>item.Email</p>
-
-            <strong>Description:</strong>
-            <p>item.Description</p>
         }
     }
 }
+
+<a asp-controller="Contact" asp-action="Create">Create new contact</a>
 
 
 

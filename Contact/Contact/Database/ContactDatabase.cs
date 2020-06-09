@@ -11,7 +11,7 @@ namespace Contact.Database
         public interface IContactDatabase
         {
         ContactPerson Insert(ContactPerson contact);
-            IEnumerable<ContactPerson> GetMovies();
+            IEnumerable<ContactPerson> GetContacts();
         ContactPerson GetContact(int id);
             void Delete(int id);
             void Update(int id, ContactPerson contact);
@@ -35,7 +35,7 @@ namespace Contact.Database
             return _contacts.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<ContactPerson> GetMovies()
+        public IEnumerable<ContactPerson> GetContacts()
         {
             return _contacts;
         }
