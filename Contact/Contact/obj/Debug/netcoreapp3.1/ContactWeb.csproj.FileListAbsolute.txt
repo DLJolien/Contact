@@ -38,3 +38,4 @@ C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.genruntimeconfig.cache
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.csproj.CopyComplete
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Detail.cshtml.g.cs
+C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Update.cshtml.g.cs

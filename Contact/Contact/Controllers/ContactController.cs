@@ -75,5 +75,38 @@ namespace ContactWeb
             }
             
         }
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            ContactPerson contactToUpdate = _contactDatabase.GetContact(id);
+            ContactEditViewModel vm = new ContactEditViewModel()
+            {
+                FirstName = contactToUpdate.FirstName,
+                SecondName = contactToUpdate.SecondName,
+                Birthdate = contactToUpdate.Birthdate,
+                Description = contactToUpdate.Description,
+                PhoneNumber = contactToUpdate.PhoneNumber,
+                Address = contactToUpdate.Address,
+                Email = contactToUpdate.Email
+            };
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult Update(ContactEditViewModel vm)
+        {
+            ContactPerson updatedPerson = new ContactPerson()
+            {
+                Id = vm.Id,
+                FirstName = vm.FirstName,
+                SecondName = vm.SecondName,
+                Birthdate = vm.Birthdate,
+                Address = vm.Address,
+                PhoneNumber = vm.PhoneNumber,
+                Email = vm.Email,
+                Description = vm.Description
+            };
+            _contactDatabase.Update(updatedPerson.Id, updatedPerson);
+            return RedirectToAction("Index");
+        }
     }
 }
