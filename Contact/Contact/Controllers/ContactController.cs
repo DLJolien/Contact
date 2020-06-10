@@ -2,6 +2,7 @@
 using Contact.Domain;
 using Contact.Models;
 using ContactWeb.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32;
@@ -17,9 +18,11 @@ namespace ContactWeb
     public class ContactController : Controller
     {
         private readonly IContactDatabase _contactDatabase;
-        public ContactController(IContactDatabase contactDatabase)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public ContactController(IContactDatabase contactDatabase, IWebHostEnvironment hostEnvironment)
         {
             _contactDatabase = contactDatabase;
+            _hostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
         {
@@ -70,7 +73,7 @@ namespace ContactWeb
                 PhoneNumber = contactToDisplay.PhoneNumber,
                 Address = contactToDisplay.Address,
                 Email = contactToDisplay.Email,
-                Avatar = contactToDisplay.Avatar,
+                PhotoUrl = contactToDisplay.PhotoUrl,
                 Category = contactToDisplay.Category
             };
             return View(vm);
@@ -82,17 +85,7 @@ namespace ContactWeb
         }
         [HttpPost]
         public IActionResult Create(ContactCreateViewModel vm)
-        {
-            byte[] file;
-
-            if (vm.Avatar != null)
-            {
-                file = GetBytesFromFile(vm.Avatar);
-            }
-            else
-            {
-                file = new byte[] { };
-            }
+        {          
 
             if (!TryValidateModel(vm))
             {
@@ -109,10 +102,22 @@ namespace ContactWeb
                     PhoneNumber = vm.PhoneNumber,
                     Email = vm.Email,
                     Description = vm.Description,
-                    Avatar = file,
                     Category = vm.Category
                 };
 
+                if (vm.Avatar != null)
+                {
+                    string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(vm.Avatar.FileName);
+                    string pathName = Path.Combine(_hostEnvironment.WebRootPath, "photos");
+                    string fileNameWithPath = Path.Combine(pathName, uniqueFileName);
+
+                    using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                    {
+                        vm.Avatar.CopyTo(stream);
+                    }
+
+                    newContact.PhotoUrl = "/Photos/" + uniqueFileName;
+                }
 
                 _contactDatabase.Insert(newContact);
                 return RedirectToAction("Index");
@@ -131,7 +136,8 @@ namespace ContactWeb
                 Description = contactToUpdate.Description,
                 PhoneNumber = contactToUpdate.PhoneNumber,
                 Address = contactToUpdate.Address,
-                Email = contactToUpdate.Email
+                Email = contactToUpdate.Email,
+                Category = contactToUpdate.Category
             };
             return View(vm);
         }
@@ -147,7 +153,8 @@ namespace ContactWeb
                 Address = vm.Address,
                 PhoneNumber = vm.PhoneNumber,
                 Email = vm.Email,
-                Description = vm.Description
+                Description = vm.Description,
+                Category = vm.Category
             };
             _contactDatabase.Update(updatedPerson.Id, updatedPerson);
             return RedirectToAction("Index");
