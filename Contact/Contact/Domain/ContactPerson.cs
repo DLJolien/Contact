@@ -17,5 +17,14 @@ namespace Contact.Domain
         public string Address { get; set; }
         public string Description { get; set; }
         public Byte[] Avatar { get; set; }
+        public Category Category { get; set; }
+    }
+    public enum Category
+    {
+        Friend, 
+        Neighbour,
+        Colleague,
+        Family,
+        Acquaintance
     }
 }

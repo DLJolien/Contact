@@ -47,7 +47,8 @@ namespace ContactWeb
                 PhoneNumber = contactToDisplay.PhoneNumber,
                 Address = contactToDisplay.Address,
                 Email = contactToDisplay.Email,
-                Avatar = contactToDisplay.Avatar
+                Avatar = contactToDisplay.Avatar,
+                Category = contactToDisplay.Category
             };
             return View(vm);
         }
@@ -85,7 +86,8 @@ namespace ContactWeb
                     PhoneNumber = vm.PhoneNumber,
                     Email = vm.Email,
                     Description = vm.Description,
-                    Avatar = file
+                    Avatar = file,
+                    Category = vm.Category
                 };
 
 

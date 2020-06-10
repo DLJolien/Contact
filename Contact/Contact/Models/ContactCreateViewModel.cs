@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Contact.Domain;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +35,7 @@ namespace ContactWeb.Models
         public string Description { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Required to upload avatar.")]
-        public IFormFile Avatar { get; set; } 
+        public IFormFile Avatar { get; set; }
+        public Category Category { get; set; }
     }
 }
