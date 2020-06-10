@@ -1,0 +1,7 @@
+﻿@model ContactWeb.Models.ContactDeleteViewModel;
+
+    <form asp-controller="Contact" asp-action="ConfirmDelete" asp-route-id="@Model.Id" method="post">
+        <p>Are you sure you want to delete the contact @Model.FirstName @Model.SecondName?</p>
+        <button class="btn btn-primary" type="submit">Yes</button>
+    </form>
+    <a asp-controller="contact" asp-action="index"> Go back</a>

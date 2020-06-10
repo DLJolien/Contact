@@ -108,5 +108,24 @@ namespace ContactWeb
             _contactDatabase.Update(updatedPerson.Id, updatedPerson);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            ContactPerson contactToDelete = _contactDatabase.GetContact(id);
+            ContactDeleteViewModel vm = new ContactDeleteViewModel()
+            {
+                Id = contactToDelete.Id,
+                FirstName = contactToDelete.FirstName,
+                SecondName = contactToDelete.SecondName,              
+            };
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult ConfirmDelete(int id)
+        {
+            _contactDatabase.Delete(id);
+            
+            return RedirectToAction("Index");
+        }
     }
 }
