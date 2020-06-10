@@ -6,11 +6,17 @@
     }
     else
     {
+<form asp-controller="Contact" asp-action="Select" method="get">
+    <label>Filter on name:</label>
+    <input type="type" name="query" />
+    <button type="submit">Apply</button>
+</form>
+        
         <strong>Names:</strong>
         foreach (ContactListViewModel item in Model)
         {
 
-        <p> <a asp-controller="contact" asp-action="detail" asp-route-id="@item.Id"> @item.FirstName @item.SecondName</a> 
+        <p> <a asp-controller="contact" asp-action="detail" asp-route-id="@item.Id"> @item.SecondName @item.FirstName</a> 
             <a asp-controller="contact" asp-action="update" asp-route-id="@item.Id"> Edit</a>
             <a asp-controller="contact" asp-action="delete" asp-route-id="@item.Id"> Delete</a></p>
 

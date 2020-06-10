@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ContactWeb
@@ -24,12 +25,34 @@ namespace ContactWeb
         {
             IEnumerable<ContactPerson> contacts = _contactDatabase.GetContacts();
             List<ContactListViewModel> vmList = new List<ContactListViewModel>();
-            foreach (ContactPerson contact in contacts)
+
+            var sortedContacts = contacts.OrderBy(x => x.SecondName).ThenBy(x =>x.FirstName).ToList();
+
+            foreach (ContactPerson contact in sortedContacts)
             {
                 vmList.Add(new ContactListViewModel(){
                     Id = contact.Id,
                     FirstName = contact.FirstName,
-                    SecondName = contact.SecondName,
+                    SecondName = contact.SecondName
+                });
+            }
+            return View(vmList);
+        }
+        [HttpGet]
+        public IActionResult Select(string query)
+        {
+            IEnumerable<ContactPerson> contacts = _contactDatabase.GetContacts();
+            List<ContactListViewModel> vmList = new List<ContactListViewModel>();
+
+            var selectedContacts = contacts.Where(x => x.FirstName.ToLower().Contains(query.ToLower()) || x.SecondName.ToLower().Contains(query.ToLower())).Select(x =>x);
+
+            foreach (ContactPerson contact in selectedContacts)
+            {
+                vmList.Add(new ContactListViewModel()
+                {
+                    Id = contact.Id,
+                    FirstName = contact.FirstName,
+                    SecondName = contact.SecondName
                 });
             }
             return View(vmList);

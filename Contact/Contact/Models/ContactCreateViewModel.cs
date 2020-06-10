@@ -34,7 +34,6 @@ namespace ContactWeb.Models
         [MaxLength(300, ErrorMessage = "Only 300 chars allowed")]
         public string Description { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Required to upload avatar.")]
         public IFormFile Avatar { get; set; }
         public Category Category { get; set; }
     }
