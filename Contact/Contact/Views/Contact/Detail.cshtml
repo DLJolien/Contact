@@ -1,6 +1,14 @@
 ﻿@model ContactDetailViewModel;
 
 
+@{
+    var base64 = Convert.ToBase64String(Model.Avatar);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+}
+
+<strong>Avatar:</strong>
+<img src="@imgSrc" />
+
 <strong>First name:</strong>
 <p>@Model.FirstName</p>
 
@@ -9,6 +17,9 @@
 
 <strong>Birthdate:</strong>
 <p>@Model.Birthdate.ToShortDateString()</p>
+
+<strong>Age:</strong>
+<p>@CalculateAge(@Model.Birthdate)</p>
 
 <strong>Phone number:</strong>
 <p>@Model.PhoneNumber</p>
@@ -21,3 +32,11 @@
 
 <strong>Description:</strong>
 <p>@Model.Description</p>
+
+@functions{
+    double CalculateAge(DateTime birthday)
+    {
+        double age = Math.Round(DateTime.Now.Subtract(birthday).TotalDays / 365.25, 0);
+        return age;
+    }
+}

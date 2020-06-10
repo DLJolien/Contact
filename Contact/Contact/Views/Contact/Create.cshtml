@@ -1,6 +1,6 @@
 ﻿@model ContactWeb.Models.ContactCreateViewModel;
 
-    <form asp-controller="Contact" asp-action="Create" method="post">
+    <form asp-controller="Contact" asp-action="Create" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="FirstName">First name:</label>
             <input asp-for="FirstName" />
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label asp-for="Birthdate">Birthdate:</label>
-            <input asp-for="Birthdate" type="date"/>
+            <input asp-for="Birthdate" type="date" />
             <span asp-validation-for="Birthdate"></span>
         </div>
         <div class="form-group">
@@ -36,5 +36,13 @@
             <input asp-for="Description" />
             <span asp-validation-for="Description"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="Avatar">Avatar:</label>
+            <input asp-for="Avatar" type="file"/>
+            <span asp-validation-for="Avatar"></span>
+        </div>
+            
         <button class="btn btn-primary" type="submit">Create</button>
     </form>
+
+

@@ -12,8 +12,6 @@ C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\bin\Debug\netcoreapp3.1\
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.csprojAssemblyReference.cache
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.AssemblyInfoInputs.cache
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.AssemblyInfo.cs
-C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.csproj.CoreCompileInputs.cache
-C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.RazorAssemblyInfo.cache
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.RazorAssemblyInfo.cs
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.TagHelpers.input.cache
@@ -40,3 +38,5 @@ C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Detail.cshtml.g.cs
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Update.cshtml.g.cs
 C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Delete.cshtml.g.cs
+C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.csproj.CoreCompileInputs.cache
+C:\Users\Jolien\source\repos\ContactWeb\Contact\Contact\obj\Debug\netcoreapp3.1\ContactWeb.MvcApplicationPartsAssemblyInfo.cache

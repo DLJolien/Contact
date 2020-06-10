@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,12 +23,17 @@ namespace ContactWeb.Models
         public DateTime Birthdate { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Phone Number required to fill in.")]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Address required to fill in.")]
         public string Address { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [MaxLength(300, ErrorMessage = "Only 300 chars allowed")]
         public string Description { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Required to upload avatar.")]
+        public IFormFile Avatar { get; set; } 
     }
 }
