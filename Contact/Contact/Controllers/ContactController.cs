@@ -161,14 +161,14 @@ namespace ContactWeb
             }
             else
             {
+                if (!string.IsNullOrEmpty(existingContact.PhotoUrl))
+                {
+                    DeletePicture(existingContact.PhotoUrl);
+                }
                 string uniqueFileName = UploadPhoto(vm.Avatar);
 
                 updatedPerson.PhotoUrl = "/Photos/" + uniqueFileName;
             }
-
-
-
-
 
             _contactDatabase.Update(updatedPerson.Id, updatedPerson);
             return RedirectToAction("Index");
@@ -222,6 +222,17 @@ namespace ContactWeb
             }
             return uniqueFileName;
         }
-        
+
+        private void DeletePicture(string photoUrl)
+        {
+            if (photoUrl.StartsWith("/"))
+            {
+                photoUrl = photoUrl.Substring(1);
+            }
+
+            string pathName = Path.Combine(_hostEnvironment.WebRootPath, photoUrl);
+            System.IO.File.Delete(pathName);
+        }
+
     }
 }
