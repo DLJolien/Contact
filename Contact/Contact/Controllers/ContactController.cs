@@ -29,11 +29,11 @@ namespace ContactWeb
             IEnumerable<ContactPerson> contacts = _contactDatabase.GetContacts();
             List<ContactListViewModel> vmList = new List<ContactListViewModel>();
 
-            var sortedContacts = contacts.OrderBy(x => x.SecondName).ThenBy(x =>x.FirstName).ToList();
+            var sortedContacts = contacts.OrderBy(x => x.SecondName).ThenBy(x => x.FirstName).ToList();
 
             foreach (ContactPerson contact in sortedContacts)
             {
-                vmList.Add(new ContactListViewModel(){
+                vmList.Add(new ContactListViewModel() {
                     Id = contact.Id,
                     FirstName = contact.FirstName,
                     SecondName = contact.SecondName
@@ -47,7 +47,7 @@ namespace ContactWeb
             IEnumerable<ContactPerson> contacts = _contactDatabase.GetContacts();
             List<ContactListViewModel> vmList = new List<ContactListViewModel>();
 
-            var selectedContacts = contacts.Where(x => x.FirstName.ToLower().Contains(query.ToLower()) || x.SecondName.ToLower().Contains(query.ToLower())).Select(x =>x);
+            var selectedContacts = contacts.Where(x => x.FirstName.ToLower().Contains(query.ToLower()) || x.SecondName.ToLower().Contains(query.ToLower())).Select(x => x);
 
             foreach (ContactPerson contact in selectedContacts)
             {
@@ -81,11 +81,11 @@ namespace ContactWeb
         [HttpGet]
         public IActionResult Create()
         {
-            return View(); 
+            return View();
         }
         [HttpPost]
         public IActionResult Create(ContactCreateViewModel vm)
-        {          
+        {
 
             if (!TryValidateModel(vm))
             {
@@ -107,14 +107,7 @@ namespace ContactWeb
 
                 if (vm.Avatar != null)
                 {
-                    string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(vm.Avatar.FileName);
-                    string pathName = Path.Combine(_hostEnvironment.WebRootPath, "photos");
-                    string fileNameWithPath = Path.Combine(pathName, uniqueFileName);
-
-                    using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-                    {
-                        vm.Avatar.CopyTo(stream);
-                    }
+                    string uniqueFileName = UploadPhoto(vm.Avatar);
 
                     newContact.PhotoUrl = "/Photos/" + uniqueFileName;
                 }
@@ -122,7 +115,7 @@ namespace ContactWeb
                 _contactDatabase.Insert(newContact);
                 return RedirectToAction("Index");
             }
-            
+
         }
         [HttpGet]
         public IActionResult Update(int id)
@@ -139,11 +132,16 @@ namespace ContactWeb
                 Email = contactToUpdate.Email,
                 Category = contactToUpdate.Category
             };
+
+
+
             return View(vm);
         }
         [HttpPost]
         public IActionResult Update(ContactEditViewModel vm)
         {
+            ContactPerson existingContact = _contactDatabase.GetContact(vm.Id);
+
             ContactPerson updatedPerson = new ContactPerson()
             {
                 Id = vm.Id,
@@ -156,6 +154,22 @@ namespace ContactWeb
                 Description = vm.Description,
                 Category = vm.Category
             };
+
+            if (vm.PhotoUrl == null)
+            {
+                updatedPerson.PhotoUrl = existingContact.PhotoUrl;
+            }
+            else
+            {
+                string uniqueFileName = UploadPhoto(vm.Avatar);
+
+                updatedPerson.PhotoUrl = "/Photos/" + uniqueFileName;
+            }
+
+
+
+
+
             _contactDatabase.Update(updatedPerson.Id, updatedPerson);
             return RedirectToAction("Index");
         }
@@ -167,7 +181,7 @@ namespace ContactWeb
             {
                 Id = contactToDelete.Id,
                 FirstName = contactToDelete.FirstName,
-                SecondName = contactToDelete.SecondName,              
+                SecondName = contactToDelete.SecondName,
             };
             return View(vm);
         }
@@ -175,7 +189,7 @@ namespace ContactWeb
         public IActionResult ConfirmDelete(int id)
         {
             _contactDatabase.Delete(id);
-            
+
             return RedirectToAction("Index");
         }
 
@@ -194,6 +208,19 @@ namespace ContactWeb
             {
                 return new byte[] { };
             }
+        }
+
+        private string UploadPhoto(IFormFile photo)
+        {
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+            string pathName = Path.Combine(_hostEnvironment.WebRootPath, "photos");
+            string fileNameWithPath = Path.Combine(pathName, uniqueFileName);
+
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                photo.CopyTo(stream);
+            }
+            return uniqueFileName;
         }
         
     }
