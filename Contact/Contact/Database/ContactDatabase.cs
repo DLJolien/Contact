@@ -69,6 +69,7 @@ namespace Contact.Database
                 contact.PhoneNumber = updatedContact.PhoneNumber;
                 contact.Id = updatedContact.Id;
                 contact.Email = updatedContact.Email;
+                contact.PhotoUrl = updatedContact.PhotoUrl;
             }
         }
     }

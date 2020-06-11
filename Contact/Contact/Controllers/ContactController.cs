@@ -155,7 +155,7 @@ namespace ContactWeb
                 Category = vm.Category
             };
 
-            if (vm.PhotoUrl == null)
+            if (vm.Avatar == null)
             {
                 updatedPerson.PhotoUrl = existingContact.PhotoUrl;
             }
@@ -213,7 +213,7 @@ namespace ContactWeb
         private string UploadPhoto(IFormFile photo)
         {
             string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
-            string pathName = Path.Combine(_hostEnvironment.WebRootPath, "photos");
+            string pathName = Path.Combine(_hostEnvironment.WebRootPath, "Photos");
             string fileNameWithPath = Path.Combine(pathName, uniqueFileName);
 
             using (var stream = new FileStream(fileNameWithPath, FileMode.Create))

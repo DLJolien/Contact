@@ -4,7 +4,7 @@
     }
 
 
-<form asp-controller="Contact" asp-action="Update" method="post">
+<form asp-controller="Contact" asp-action="Update" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="FirstName">First name:</label>
         <input asp-for="FirstName" value="@Model.FirstName" />
@@ -53,12 +53,21 @@
         <span asp-validation-for="Category"></span>
     </div>
     <div class="form-group">
-        <img src="@Model.PhotoUrl" />
-        <label asp-for="Avatar">Avatar:</label>
-        <input asp-for="Avatar" type="file" />
-        <span asp-validation-for="Avatar"></span>
+        <label asp-for="Avatar"></label>
+        <br />
+        <img src="@Model.PhotoUrl" class="contact-photo" />
+        <input asp-for="Avatar" class="form-control" />
+        <span class="text-danger" asp-validation-for="Avatar"></span>
     </div>
     <button class="btn btn-primary" type="submit">Update</button>
 </form>
 
+<a asp-controller="Contact" asp-action="Index">Back to list</a>
+
+
+<style>
+    .contact-photo {
+        max-width: 400px;
+    }
+</style>
 
