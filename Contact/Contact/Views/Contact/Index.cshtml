@@ -6,26 +6,43 @@
     }
     else
     {
-<form asp-controller="Contact" asp-action="Select" method="get">
-    <label>Filter on name:</label>
-    <input type="type" name="query" />
-    <button type="submit">Apply</button>
-</form>
+        <form asp-controller="Contact" asp-action="Select" method="get">
+            <label>Filter on name:</label>
+            <input type="type" name="query" />
+            <button type="submit">Apply</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach (ContactListViewModel item in Model)
+                    {
+                        <td> <img src="@item.PhotoUrl" class="contact-photo"/></td>
+                        <td> <a asp-controller="contact" asp-action="detail" asp-route-id="@item.Id"> @item.SecondName @item.FirstName</a></td>
+                        <td class="table-feature"> <a asp-controller="contact" asp-action="update" asp-route-id="@item.Id"> Edit</a></td>
+                        <td class="table-feature"> <a asp-controller="contact" asp-action="delete" asp-route-id="@item.Id"> Delete</a></td>
+                    }
+                </tr>                              
+            </tbody>
+        </table>
         
-        <strong>Names:</strong>
-        foreach (ContactListViewModel item in Model)
-        {
-
-        <p> <a asp-controller="contact" asp-action="detail" asp-route-id="@item.Id"> @item.SecondName @item.FirstName</a> 
-            <a asp-controller="contact" asp-action="update" asp-route-id="@item.Id"> Edit</a>
-            <a asp-controller="contact" asp-action="delete" asp-route-id="@item.Id"> Delete</a></p>
-
         }
     }
-}
-
 <a asp-controller="Contact" asp-action="Create">Create new contact</a>
-
-
-
-
+<style>
+    .contact-photo{
+        max-width: 40px;
+    }
+    .table-feature a{
+        margin-left: 40px;
+    }
+</style>

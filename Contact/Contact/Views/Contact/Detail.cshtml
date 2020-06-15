@@ -1,9 +1,14 @@
 ﻿@model ContactDetailViewModel;
 
-<label asp-for="PhotoUrl"></label>
-<br />
-<img src="@Model.PhotoUrl" class="photo-url" />
-
+@{
+    if (!String.IsNullOrEmpty(Model.PhotoUrl))
+    {
+        <strong>Avatar</strong>
+        <br />
+        <img src="@Model.PhotoUrl" class="photo-url" />
+        <br />
+    }
+}
 <strong>First name:</strong>
 <p>@Model.FirstName</p>
 
@@ -31,6 +36,12 @@
 <strong>Description:</strong>
 <p>@Model.Description</p>
 
+<p>
+    <a asp-controller="contact" asp-action="update" asp-route-id="@Model.Id"> Edit</a> |
+    <a asp-controller="contact" asp-action="delete" asp-route-id="@Model.Id"> Delete</a> |
+    <a asp-controller="contact" asp-action="index"> Back to index</a>
+</p>
+
 @functions{
     double CalculateAge(DateTime birthday)
     {
@@ -38,8 +49,9 @@
         return age;
     }
 }
+
 <style>
-    .photo-url{
+    .photo-url {
         max-width: 400px;
     }
 </style>

@@ -36,7 +36,8 @@ namespace ContactWeb
                 vmList.Add(new ContactListViewModel() {
                     Id = contact.Id,
                     FirstName = contact.FirstName,
-                    SecondName = contact.SecondName
+                    SecondName = contact.SecondName,
+                    PhotoUrl = contact.PhotoUrl
                 });
             }
             return View(vmList);
@@ -66,6 +67,7 @@ namespace ContactWeb
             ContactPerson contactToDisplay = _contactDatabase.GetContact(id);
             ContactDetailViewModel vm = new ContactDetailViewModel()
             {
+                Id = contactToDisplay.Id,
                 FirstName = contactToDisplay.FirstName,
                 SecondName = contactToDisplay.SecondName,
                 Birthdate = contactToDisplay.Birthdate,
@@ -171,7 +173,7 @@ namespace ContactWeb
             }
 
             _contactDatabase.Update(updatedPerson.Id, updatedPerson);
-            return RedirectToAction("Index");
+            return RedirectToAction("Detail", new { Id = vm.Id});
         }
         [HttpGet]
         public IActionResult Delete(int id)
